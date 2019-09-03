@@ -30,7 +30,7 @@ public class StudentController extends HttpServlet {
 		param.setSociety(society);
 		param.setSsn(ssn);
 		StudentService service = new StudentServiceImpl();
-		service.reportCard(param);
+		service.createGrade(param);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
