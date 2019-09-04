@@ -1,4 +1,4 @@
-package com.grade.web.dao;
+package com.grade.web.daos;
 
 import com.grade.web.domain.StudentBean;
 

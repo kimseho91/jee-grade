@@ -3,32 +3,9 @@ package com.grade.web.domain;
 import java.io.Serializable;
 
 public class StudentBean implements Serializable {
-	private String name,ssn,classNum,totatlScore,average,kor, eng, math, society;
+	private static final long serialVersionUID = 1L;
+	private String name,ssn,classNum,totatlScore,average;
 	
-	public String getKor() {
-		return kor;
-	}
-	public void setKor(String kor) {
-		this.kor = kor;
-	}
-	public String getEng() {
-		return eng;
-	}
-	public void setEng(String eng) {
-		this.eng = eng;
-	}
-	public String getMath() {
-		return math;
-	}
-	public void setMath(String math) {
-		this.math = math;
-	}
-	public String getSociety() {
-		return society;
-	}
-	public void setSociety(String society) {
-		this.society = society;
-	}
 	public String getName() {
 		return name;
 	}

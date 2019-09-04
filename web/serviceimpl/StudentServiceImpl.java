@@ -2,8 +2,9 @@ package com.grade.web.serviceimpl;
 
 import java.util.Random;
 
-import com.grade.web.dao.StudentDAO;
-import com.grade.web.daoimpl.StudentDAOImpl;
+import com.grade.web.daoimpls.StudentDAOImpl;
+import com.grade.web.daos.StudentDAO;
+import com.grade.web.domain.GradeBean;
 import com.grade.web.domain.StudentBean;
 import com.grade.web.service.StudentService;
 
@@ -17,26 +18,9 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void createGrade(StudentBean param) {
-		sum(param);
+	public void createHakbun(StudentBean param) {
 		createNum(param);
 		dao.Information(param);
-	}
-
-	@Override
-	public void sum(StudentBean param) {
-		String average, totalScore = "";
-		int kor, eng, math, society, total, avg = 0;
-		kor = Integer.parseInt(param.getKor());
-		eng = Integer.parseInt(param.getEng());
-		math = Integer.parseInt(param.getMath());
-		society = Integer.parseInt(param.getSociety());
-		total = kor+eng+math+society;
-		avg = total/4;
-		totalScore = String.valueOf(total);
-		average = String.valueOf(avg);
-		param.setTotatlScore(totalScore);
-		param.setAverage(average);
 	}
 
 	@Override
