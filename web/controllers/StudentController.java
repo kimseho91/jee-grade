@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.grade.web.pool.Constants;
+import com.grade.web.daoimpls.StudentDAOImpl;
+import com.grade.web.daos.StudentDAO;
 import com.grade.web.domain.StudentBean;
 import com.grade.web.service.StudentService;
 import com.grade.web.serviceimpl.StudentServiceImpl;
@@ -17,10 +19,9 @@ public class StudentController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
-		System.out.println(action);
-		String dest = request.getParameter("dest");
-		System.out.println(dest);
+		StudentService service = new StudentServiceImpl();
+		StudentBean param = new StudentBean();
+		StudentDAO dao = new StudentDAOImpl();
 		switch (request.getParameter("action")) {
 		case "move":
 			request.getRequestDispatcher
@@ -33,11 +34,9 @@ public class StudentController extends HttpServlet {
 		case "register":
 			String name = request.getParameter("name");
 			String ssn = request.getParameter("ssn");
-			StudentBean param = new StudentBean();
 			param.setName(name);
 			param.setSsn(ssn);
-//		StudentService service = new StudentServiceImpl();
-//		service.createGrade(param);
+			service.save(param);
 			request.getRequestDispatcher
 			(String.format(
 					Constants.VIEW_PATH, 
@@ -46,6 +45,19 @@ public class StudentController extends HttpServlet {
 					.forward(request, response);
 			break;
 		case "login":
+			name = request.getParameter("name");
+			ssn = request.getParameter("ssn");
+			if (name.equals(service.login(param).getName())&&ssn.equals(service.login(param).getSsn())) {
+				request.setAttribute("customer",param);
+				request.getRequestDispatcher(
+						String.format(Constants.VIEW_PATH, "customer", request.getParameter("dest")))
+						.forward(request, response);
+			} else {
+				request.setAttribute("customer",param);
+				request.getRequestDispatcher(
+						String.format(Constants.VIEW_PATH, "customer","login"))
+						.forward(request, response);
+			}
 			break;
 		}
 	}
